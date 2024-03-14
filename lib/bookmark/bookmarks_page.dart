@@ -12,7 +12,7 @@ class BookmarkPage extends StatefulWidget {
 class _BookmarkPageState extends State<BookmarkPage> {
   @override
   Widget build(BuildContext context) {
-  var bookmarkBloc = Provider.of<BookmarkBloc>(context);
+    var bookmarkBloc = Provider.of<BookmarkBloc>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text("Bookmarks"),
@@ -25,12 +25,18 @@ class _BookmarkPageState extends State<BookmarkPage> {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(bookmarkBloc.items[index].title),
-                  subtitle: Text(bookmarkBloc.items[index].subTitle),
-                );
+                return 
+                    // color: Colors.lightBlue[200],
+                    ListTile(
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2.0)),
+                      hoverColor: Colors.amber[50],
+                      tileColor: Colors.yellow[200],
+                      title: Text(bookmarkBloc.items[index].title),
+                      subtitle: Text(bookmarkBloc.items[index].subTitle),
+                    );
+                      
               },
-            )
+            ),
           ],
         ),
       ),
