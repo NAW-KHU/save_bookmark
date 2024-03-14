@@ -1,12 +1,8 @@
-import 'dart:js';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:save_bookmark_app/model/items_model.dart';
-
 import 'package:save_bookmark_app/bookmark/bookmarks_page.dart';
-import 'package:save_bookmark_app/provider/bookmark_provider.dart';
 import 'package:save_bookmark_app/provider/bookmark_provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -70,33 +66,40 @@ class _HomePageState extends State<HomePage> {
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: itemsList.length,
                 itemBuilder: (context, index) {
-                  return ListTile(
-                    onTap: () {
-                      bookmarkBloc.addCount();
-                      ItemModel itemModel = ItemModel(
-                        title: itemsList[index]['title'],
-                        subTitle: itemsList[index]['subtitle'],
-                      );
+                  return (
+                    // color: Colors.lightBlue[200],
+                    ListTile(
+                      shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(2.0)),
+                      tileColor: Colors.lightBlue[50],
+                      onTap: () {
+                        bookmarkBloc.addCount();
+                        ItemModel itemModel = ItemModel(
+                          title: itemsList[index]['title'],
+                          subTitle: itemsList[index]['subtitle'],
+                        );
 
-                      bookmarkBloc.addItems(itemModel);
+                        bookmarkBloc.addItems(itemModel);
 
-                      if (kDebugMode) {
-                        print(bookmarkBloc.items[index].title);
-                        print(bookmarkBloc.items.length);
-                      }
+                        if (kDebugMode) {
+                          print(bookmarkBloc.items[index].title);
+                        }
+                        if (kDebugMode) {
+                          print(bookmarkBloc.items.length);
+                        }
 
-                      setState(() {
-                        itemsList[index]['status'] = "true";
-                      });
-                    },
-                    title: Text(itemsList[index]['title']),
-                    subtitle: Text(itemsList[index]['subtitle']),
-                    trailing: itemsList[index]['status'] == "false"
-                              ? const Icon(Icons.star_border)
-                              : const Icon(
-                                Icons.star,
-                                color: Colors.blue,
-                                ),
+                        setState(() {
+                          itemsList[index]['status'] = "true";
+                        });
+                      },
+                      title: Text(itemsList[index]['title']),
+                      subtitle: Text(itemsList[index]['subtitle']),
+                      trailing: itemsList[index]['status'] == "false"
+                          ? const Icon(Icons.star_border)
+                          : const Icon(
+                              Icons.star,
+                              color: Colors.blue,
+                            ),
+                    )
                   );
                 })
           ],
